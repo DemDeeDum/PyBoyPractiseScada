@@ -60,7 +60,8 @@ def getWarningMessages(message):
 @bot.message_handler(commands=['getMessagesByTime'])
 def getWarningMessagesByDate(message):
     _to_user = '<b>%s!</b>'%(message.from_user.first_name) 
-    msg = '%s %s'%(_to_user, phrases._date_input_instruction())
+    msg = '%s %s %s'%(_to_user, phrases._date_input_instruction()
+    ,phrases._get_by_date_info())
     bot.send_message(message.chat.id, msg ,parse_mode='html',
     reply_markup=keyboards.main_menu())
     flags.date_input_mode = True
@@ -96,7 +97,8 @@ def getInlineMenuValues(call):
                 _to_user = '<b>%s!</b>'%(call.message.chat.first_name)
                 choice = "Вы выбрали %s!"%(flags.select_mode)
                 if flags.log_date_mode:
-                    msg = '%s %s %s'%(_to_user, choice, phrases._date_input_instruction())
+                    msg = '%s %s %s %s'%(_to_user, choice
+                    , phrases._date_input_instruction(), phrases._get_by_date_info())
                     bot.send_message(call.message.chat.id, msg ,parse_mode='html',
                     reply_markup=keyboards.main_menu())
                     flags.date_input_mode = True
